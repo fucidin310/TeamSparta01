@@ -98,9 +98,8 @@ Animal* CreateRandomAnimal() {
 	case 0: return new Dog();
 	case 1: return new Cat();
 	case 2: return new Cow();
+	default: return nullptr;
 	}
-
-	return nullptr;
 };
 
 int main() {
