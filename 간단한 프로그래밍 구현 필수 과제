@@ -14,15 +14,17 @@ float CalculateAverage(int arr[], int size) {
 }
 
 int main() {	
-	int Num[5];
+	const int arrSize = 5;
+
+	int Num[arrSize];
 
 	cout << "숫자를 입력하세요 : ";
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < arrSize; i++) {
 		cin >> Num[i];
 	}
 
-	cout << "합 : " << CalculateSum(Num, 5) << endl;
-	cout << "평균 : " << CalculateAverage(Num, 5) << endl;
+	cout << "합 : " << CalculateSum(Num, arrSize) << endl;
+	cout << "평균 : " << CalculateAverage(Num, arrSize) << endl;
 
 	return 0;
 }
