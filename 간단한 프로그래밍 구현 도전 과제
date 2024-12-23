@@ -56,17 +56,19 @@ void MergeSort(int arr[], int start, int end, function<bool(int, int)> comp) {
 }
 
 int main() {	
-	int Num[5];
+	const int arrSize = 5;
+
+	int Num[arrSize];
 
 	cout << "숫자를 입력하세요 : ";
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < arrSize; i++) {
 		cin >> Num[i];
 	}
 
 	MergeSort(Num, 0, 4, less<int>());
 
 	cout << "\n오름차순 정렬 : ";
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < arrSize; i++) {
 		cout << Num[i] << " ";
 	}
 	cout << endl;
@@ -74,7 +76,7 @@ int main() {
 	MergeSort(Num, 0, 4, greater<int>());
 
 	cout << "\n내림차순 정렬 : ";
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < arrSize; i++) {
 		cout << Num[i] << " ";
 	}
 }
