@@ -1,7 +1,8 @@
 #include <iostream>
+#include <functional>
 using namespace std;
 
-void Merge_AscendingOrder(int arr[], int left, int mid, int right) {
+void Merge(int arr[], int left, int mid, int right, function<bool(int, int)> comp) {
 	int* tempArr = new int[right - left];
 
 	int firstPointer = left;
@@ -10,7 +11,7 @@ void Merge_AscendingOrder(int arr[], int left, int mid, int right) {
 
 	while (firstPointer <= mid && secondPointer <= right)
 	{
-		if (arr[firstPointer] < arr[secondPointer]) {
+		if (comp(arr[firstPointer], arr[secondPointer])) {
 			tempArr[tempIndex] = arr[firstPointer];
 			firstPointer++;
 		}
@@ -43,68 +44,15 @@ void Merge_AscendingOrder(int arr[], int left, int mid, int right) {
 	}
 }
 
-void MergeSort_AscendingOrder(int arr[], int start, int end) {
+void MergeSort(int arr[], int start, int end, function<bool(int, int)> comp) {
 	if (start >= end) return;
 
 	int mid = start + (end - start) / 2;
 
-	MergeSort_AscendingOrder(arr, start, mid);
-	MergeSort_AscendingOrder(arr, mid + 1, end);
+	MergeSort(arr, start, mid, comp);
+	MergeSort(arr, mid + 1, end, comp);
 
-	Merge_AscendingOrder(arr, start, mid, end);
-}
-
-void Merge_DescendingOrder(int arr[], int left, int mid, int right) {
-	int* tempArr = new int[right - left];
-
-	int firstPointer = left;
-	int secondPointer = mid + 1;
-	int tempIndex = 0;
-
-	while (firstPointer <= mid && secondPointer <= right)
-	{
-		if (arr[firstPointer] > arr[secondPointer]) {
-			tempArr[tempIndex] = arr[firstPointer];
-			firstPointer++;
-		}
-		else {
-			tempArr[tempIndex] = arr[secondPointer];
-			secondPointer++;
-		}
-
-		tempIndex++;
-	}
-
-	while (firstPointer <= mid)
-	{
-		tempArr[tempIndex] = arr[firstPointer];
-		firstPointer++;
-		tempIndex++;
-	}
-
-	while (secondPointer <= right)
-	{
-		tempArr[tempIndex] = arr[secondPointer];
-		secondPointer++;
-		tempIndex++;
-	}
-
-	int k = 0;
-	for (int i = left; i <= right; i++) {
-		arr[i] = tempArr[k];
-		k++;
-	}
-}
-
-void MergeSort_DescendingOrder(int arr[], int start, int end) {
-	if (start >= end) return;
-
-	int mid = start + (end - start) / 2;
-
-	MergeSort_DescendingOrder(arr, start, mid);
-	MergeSort_DescendingOrder(arr, mid + 1, end);
-
-	Merge_DescendingOrder(arr, start, mid, end);
+	Merge(arr, start, mid, end, comp);
 }
 
 int main() {	
@@ -115,14 +63,15 @@ int main() {
 		cin >> Num[i];
 	}
 
-	MergeSort_AscendingOrder(Num, 0, 4);
+	MergeSort(Num, 0, 4, less<int>());
 
 	cout << "\n오름차순 정렬 : ";
 	for (int i = 0; i < 5; i++) {
 		cout << Num[i] << " ";
 	}
+	cout << endl;
 
-	MergeSort_DescendingOrder(Num, 0, 4);
+	MergeSort(Num, 0, 4, greater<int>());
 
 	cout << "\n내림차순 정렬 : ";
 	for (int i = 0; i < 5; i++) {
