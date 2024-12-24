@@ -23,7 +23,7 @@ int main() {
 		cin >> Num[i];
 	}
 
-	cout << "합 : " << CalculateSum(Num, arrSize) << endl;
+	cout << "합계 : " << CalculateSum(Num, arrSize) << endl;
 	cout << "평균 : " << CalculateAverage(Num, arrSize) << endl;
 
 	return 0;
